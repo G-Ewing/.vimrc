@@ -1,24 +1,17 @@
 syntax on
 call plug#begin('/.vim/plugged')
 " Colorschemes
-Plug 'J4CKR3D/Hypsteria'
-Plug 'co1ncidence/bliss'
-Plug 'flrnd/plastic.vim'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'wadackel/vim-dogrun'
 Plug 'glepnir/oceanic-material'
 Plug 'senran101604/neotrix.vim'
 Plug 'benbusby/vim-earthbound-themes'
-Plug 'sainnhe/sonokai'
-Plug 'sainnhe/edge'
-Plug 'rakr/vim-one'
-Plug 'kyoz/purify'
-Plug 'franbach/miramare'
-Plug 'arcticicestudio/nord-vim'
-Plug 'flrnd/candid.vim'
 Plug 'pineapplegiant/spaceduck'
 Plug 'mhartington/oceanic-next'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'ayu-theme/ayu-vim'
 
+Plug 'voldikss/vim-floaterm'
 Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -30,18 +23,25 @@ Plug 'vim-syntastic/syntastic'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'preservim/nerdcommenter'
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim'
 Plug 'preservim/nerdtree'
 call plug#end()
 au FileType c,cpp,objc,objcpp,js,tsx,ts,css,vim,go call rainbow#load()
 filetype plugin on
 
+let g:SuperTabDefaultCompletionType = "<c-n>"
 let mapleader = "-"
 let maplocalleader = "\\"
+
+set scrolloff=10
+set nowrap
+set nohlsearch
+" Enable blinking together with different cursor shapes for insert/command
+" mode, and cursor highlighting:
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+ \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+ \,sm:block-blinkwait175-blinkoff150-blinkon175
 
 "split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -56,6 +56,10 @@ set splitright
 set foldmethod=indent
 set foldlevel=99
 
+nnoremap   <silent>   <c-t>   :FloatermToggle<CR>
+
+tnoremap   <silent>   <c-t>   <C-\><C-n>:FloatermToggle<CR>
+
 nnoremap <c-n> :RainbowToggle<cr>
 "Enable folding with the spacebar
 nnoremap <space> za
@@ -67,9 +71,9 @@ nnoremap <c-p> :Files<cr>
 nnoremap <space>e :NERDTreeToggle<cr>
 " toggle coc explorer
 "nnoremap <space>e :CocCommand explorer<CR>
-au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
+au BufNewFile,BufRead *.py,*.java,*.cpp,*.c,*.cs,*.rkt,*.h,*.html,*.go
+    \ set tabstop=3 |
+    \ set softtabstop=3 |
     \ set shiftwidth=4 |
     \ set textwidth=120 |
     \ set expandtab |
@@ -127,7 +131,7 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-colorscheme oceanic_material
+colorscheme ayu
 
 set nu rnu " relative line numbering
 set clipboard=unnamed " public copy/paste register
